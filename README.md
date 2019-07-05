@@ -2,7 +2,7 @@
 
 Türkiye İl İlçe Köy Mahalle veritabanına bağlı olarak adres seçme flutter paketi
 
-Flutter packetini kullanmak için
+Flutter paketini kullanmak için
 - [pub.dev sitesinden alabilirsiniz](https://pub.dev/packages/turkiye_il_ilce_mahalle)
 
 ## How to use
