@@ -1,12 +1,7 @@
 library turkiye_il_ilce_mahalle;
 
 import 'package:flutter/material.dart';
-
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+import 'package:turkiye_il_ilce_mahalle/aramasayfasi.dart';
 
 class AdresGetir extends StatefulWidget {
   @override
@@ -100,14 +95,17 @@ class _AdresGetirState extends State<AdresGetir> {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(
+              Navigator.push(
                 context,
-                "/adres_arama_syf",
-                arguments: {
-                  "liste": "il",
-                  "kod": "",
-                  "fonksiyon": ilSecimiYap,
-                },
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return AdresAramaSyf({
+                      "liste": "il",
+                      "kod": "",
+                      "fonksiyon": ilSecimiYap,
+                    });
+                  },
+                ),
               );
             },
             child: Container(
@@ -133,14 +131,17 @@ class _AdresGetirState extends State<AdresGetir> {
             onTap: _il['il'] == "İl Seçimi Yapın"
                 ? null
                 : () {
-                    Navigator.pushNamed(
+                    Navigator.push(
                       context,
-                      "/adres_arama_syf",
-                      arguments: {
-                        "liste": "ilce",
-                        "kod": _il['id'],
-                        "fonksiyon": ilceSecimiYap
-                      },
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return AdresAramaSyf({
+                            "liste": "ilce",
+                            "kod": _il['id'],
+                            "fonksiyon": ilceSecimiYap
+                          });
+                        },
+                      ),
                     );
                   },
             child: Container(
@@ -166,14 +167,17 @@ class _AdresGetirState extends State<AdresGetir> {
             onTap: _ilce['ilce'] == "İlçe Seçimi Yapın"
                 ? null
                 : () {
-                    Navigator.pushNamed(
+                    Navigator.push(
                       context,
-                      "/adres_arama_syf",
-                      arguments: {
-                        "liste": "koy",
-                        "kod": _ilce['id'],
-                        "fonksiyon": koySecimiYap
-                      },
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return AdresAramaSyf({
+                            "liste": "koy",
+                            "kod": _ilce['id'],
+                            "fonksiyon": koySecimiYap
+                          });
+                        },
+                      ),
                     );
                   },
             child: Container(
@@ -199,14 +203,17 @@ class _AdresGetirState extends State<AdresGetir> {
             onTap: _koy['koy'] == "Köy Seçimi Yapın"
                 ? null
                 : () {
-                    Navigator.pushNamed(
+                    Navigator.push(
                       context,
-                      "/adres_arama_syf",
-                      arguments: {
-                        "liste": "mahalle",
-                        "kod": _koy['id'],
-                        "fonksiyon": mahalleSecimiYap,
-                      },
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return AdresAramaSyf({
+                            "liste": "mahalle",
+                            "kod": _koy['id'],
+                            "fonksiyon": mahalleSecimiYap,
+                          });
+                        },
+                      ),
                     );
                   },
             child: Container(

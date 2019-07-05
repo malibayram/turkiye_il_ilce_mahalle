@@ -6,6 +6,10 @@ import 'package:turkiye_il_ilce_mahalle/koy.dart';
 import 'package:turkiye_il_ilce_mahalle/mahalle.dart';
 
 class AdresAramaSyf extends StatefulWidget {
+  final Map gelen;
+
+  const AdresAramaSyf(this.gelen);
+
   @override
   _AdresAramaSyfState createState() => _AdresAramaSyfState();
 }
@@ -25,7 +29,7 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final Map args = ModalRoute.of(context).settings.arguments;
+    final Map args = widget.gelen;
     aranan = args['liste'];
     kod = args["kod"];
     secim = args['fonksiyon'];
