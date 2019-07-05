@@ -33,23 +33,25 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
     aranan = args['liste'];
     kod = args["kod"];
     secim = args['fonksiyon'];
+
+    print(kod);
   }
 
   Future<List> listeOlustur() async {
     switch (aranan) {
       case 'ilce':
         liste = json.decode(Ilce.ilce);
-        return liste;
+        return liste.where((w) => w['il_id'] == kod).toList();
         break;
 
       case 'koy':
         liste = json.decode(Koy.koy);
-        return liste;
+        return liste.where((w) => w['ilce_id'] == kod).toList();
         break;
 
       case 'mahalle':
         liste = json.decode(Mahalle.mahalle);
-        return liste;
+        return liste.where((w) => w['koy_id'] == kod).toList();
         break;
 
       default:
@@ -93,26 +95,27 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
         future: listeOlustur(),
         builder: (ctx, a) {
           if (a.hasData) {
+            List cevap = a.data;
             return ListView.builder(
-              itemCount: liste.length,
+              itemCount: cevap.length,
               itemBuilder: (ctx, i) {
-                if (liste[i][aranan]
+                if (cevap[i][aranan]
                         .toString()
                         .toUpperCase()
                         .contains(k.toUpperCase()) ||
-                    liste[i][aranan]
+                    cevap[i][aranan]
                         .toString()
                         .toLowerCase()
                         .contains(k.toLowerCase())) {
                   return ListTile(
-                    selected: int.parse(liste[i]['id']) == secili,
+                    selected: int.parse(cevap[i]['id']) == secili,
                     onTap: () {
-                      secili = int.parse(liste[i]['id']);
-                      secim(liste[i]);
+                      secili = int.parse(cevap[i]['id']);
+                      secim(cevap[i]);
                       setState(() {});
                     },
-                    title: Text(liste[i][aranan]),
-                    trailing: int.parse(liste[i]['id']) == secili
+                    title: Text(cevap[i][aranan]),
+                    trailing: int.parse(cevap[i]['id']) == secili
                         ? Icon(Icons.check)
                         : null,
                   );

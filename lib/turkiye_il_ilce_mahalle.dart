@@ -26,7 +26,7 @@ class _AdresGetirState extends State<AdresGetir> {
     _ilce = secim;
     _koy = {"koy": "Köy Seçimi Yapın"};
     _mahalle = {"mahalle": "Mahalle Seçimi Yapın"};
-    print(_ilce['ilce']);
+    print(_ilce.toString());
   }
 
   koySecimiYap(Map secim) {

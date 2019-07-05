@@ -1,7 +1,7 @@
 name: turkiye_il_ilce_mahalle
 description: Türkiye İl İlçe Köy Mahalle veritabanına bağlı olarak adres seçme flutter paketi
-version: 0.0.1
-author: Mehmet Ali Bayram<malibayram91@gmail.com>
+version: 0.0.3
+author: Mehmet Ali Bayram<malibayram91@gmail.com>, Süleyman Bal<kendalpinar5@gmail.com>
 homepage: https://github.com/malibayram91/turkiye_il_ilce_mahalle
 
 environment:
