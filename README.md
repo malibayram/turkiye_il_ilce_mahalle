@@ -5,7 +5,7 @@ Türkiye İl İlçe Köy Mahalle veritabanına bağlı olarak adres seçme flutt
 Flutter paketini kullanmak için
 - [pub.dev sitesinden alabilirsiniz](https://pub.dev/packages/turkiye_il_ilce_mahalle)
 
-## How to use
+### How to use
 Adres getir paketini aşağıdaki şekilde kullanabilirsiniz.
 
 ```dart
