@@ -1,16 +1,54 @@
-# example
+```dart
+import 'package:flutter/material.dart';
+import 'package:turkiye_il_ilce_mahalle/turkiye_il_ilce_mahalle.dart';
 
-A new Flutter application.
+main() {
+  runApp(
+    MaterialApp(
+      home: Ornek(),
+    ),
+  );
+}
 
-## Getting Started
+class Ornek extends StatefulWidget {
+  @override
+  _OrnekState createState() => _OrnekState();
+}
 
-This project is a starting point for a Flutter application.
+class _OrnekState extends State<Ornek> {
+  String _il;
+  String _ilce;
+  String _koy;
+  String _mahalle;
 
-A few resources to get you started if this is your first Flutter project:
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Adres Seçimi"),
+      ),
+      body: Container(
+        child: AdresGetir(
+          il: (il) {
+            _il = il;
+            print("il seçimi tamamlandı: $il");
+          },
+          ilce: (ilce) {
+            _ilce = ilce;
+            print("il seçimi tamamlandı: $ilce");
+          },
+          koy: (koy) {
+            _koy = koy;
+            print("il seçimi tamamlandı: $koy");
+          },
+          mahalle: (mahalle) {
+            _mahalle = mahalle;
+            print("il seçimi tamamlandı: $mahalle");
+          },
+        ),
+      ),
+    );
+  }
+}
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+ ```

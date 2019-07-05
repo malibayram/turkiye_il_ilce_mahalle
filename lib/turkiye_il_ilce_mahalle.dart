@@ -4,6 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:turkiye_il_ilce_mahalle/aramasayfasi.dart';
 
 class AdresGetir extends StatefulWidget {
+  final Function il;
+  final Function ilce;
+  final Function koy;
+  final Function mahalle;
+
+  const AdresGetir(
+      {Key key,
+      @required this.il,
+      @required this.ilce,
+      @required this.koy,
+      @required this.mahalle})
+      : super(key: key);
+
   @override
   _AdresGetirState createState() => _AdresGetirState();
 }
@@ -19,6 +32,7 @@ class _AdresGetirState extends State<AdresGetir> {
     _ilce = {"ilce": "İlçe Seçimi Yapın"};
     _koy = {"koy": "Köy Seçimi Yapın"};
     _mahalle = {"mahalle": "Mahalle Seçimi Yapın"};
+    widget.il(_il['il']);
     print(_il['il']);
   }
 
@@ -26,17 +40,20 @@ class _AdresGetirState extends State<AdresGetir> {
     _ilce = secim;
     _koy = {"koy": "Köy Seçimi Yapın"};
     _mahalle = {"mahalle": "Mahalle Seçimi Yapın"};
-    print(_ilce.toString());
+    widget.ilce(_ilce['ilce']);
+    print(_ilce['ilce']);
   }
 
   koySecimiYap(Map secim) {
     _koy = secim;
     _mahalle = {"mahalle": "Mahalle Seçimi Yapın"};
+    widget.koy(_koy['koy']);
     print(_koy['koy']);
   }
 
   mahalleSecimiYap(Map secim) {
     _mahalle = secim;
+    widget.mahalle(_mahalle['mahalle']);
     print(_mahalle['mahalle']);
   }
 

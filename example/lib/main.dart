@@ -15,6 +15,11 @@ class Ornek extends StatefulWidget {
 }
 
 class _OrnekState extends State<Ornek> {
+  String _il;
+  String _ilce;
+  String _koy;
+  String _mahalle;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +27,24 @@ class _OrnekState extends State<Ornek> {
         title: Text("Adres Seçimi"),
       ),
       body: Container(
-        child: AdresGetir(),
+        child: AdresGetir(
+          il: (il) {
+            _il = il;
+            print("il seçimi tamamlandı: $il");
+          },
+          ilce: (ilce) {
+            _ilce = ilce;
+            print("il seçimi tamamlandı: $ilce");
+          },
+          koy: (koy) {
+            _koy = koy;
+            print("il seçimi tamamlandı: $koy");
+          },
+          mahalle: (mahalle) {
+            _mahalle = mahalle;
+            print("il seçimi tamamlandı: $mahalle");
+          },
+        ),
       ),
     );
   }
