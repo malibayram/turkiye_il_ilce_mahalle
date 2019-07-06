@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:turkiye_il_ilce_mahalle/il.dart';
-import 'package:turkiye_il_ilce_mahalle/ilce.dart';
-import 'package:turkiye_il_ilce_mahalle/koy.dart';
-import 'package:turkiye_il_ilce_mahalle/mahalle.dart';
+import '../datas/il.dart';
+import '../datas/ilce.dart';
+import '../datas/koy.dart';
+import '../datas/mahalle.dart';
 
 class AdresAramaSyf extends StatefulWidget {
   final Map gelen;

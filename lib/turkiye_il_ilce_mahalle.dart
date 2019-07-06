@@ -1,7 +1,7 @@
 library turkiye_il_ilce_mahalle;
 
 import 'package:flutter/material.dart';
-import 'package:turkiye_il_ilce_mahalle/aramasayfasi.dart';
+import 'pages/aramasayfasi.dart';
 
 class AdresGetir extends StatefulWidget {
   final Function il;
