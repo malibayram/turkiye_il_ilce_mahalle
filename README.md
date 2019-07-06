@@ -1,12 +1,11 @@
 # turkiye_il_ilce_mahalle
+Türkiye İl İlçe Köy Mahalle veritabanına bağlı olarak adres seçme flutter paketi
 
-Turkiye Il Ilce Koy Mahalle veritabanina bagli olarak adres secme flutter paketi
-
-Flutter paketini kullanmak icin
-- [pub.dev sitesinden alabilirsiniz](https://pub.dev/packages/turkiye_il_ilce_mahalle)
+Flutter paketini kullanmak için
+- [buradan buyrun](https://pub.dev/packages/turkiye_il_ilce_mahalle)
 
 ## How to use
-Adres getir paketini asagidaki sekilde kullanabilirsiniz.
+Adres getir paketini aşağıdaki şekilde kullanabilirsiniz.
 
 ```dart
 class _OrnekState extends State<Ornek> {
@@ -14,30 +13,29 @@ class _OrnekState extends State<Ornek> {
   String _ilce;
   String _koy;
   String _mahalle;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Adres Secimi"),
+        title: Text("Adres Seçimi"),
       ),
       body: Container(
         child: AdresGetir(
           il: (il) {
             _il = il;
-            print("il secimi tamamlandi: $il");
+            print("il seçimi tamamlandı: $il");
           },
           ilce: (ilce) {
             _ilce = ilce;
-            print("il secimi tamamlandi: $ilce");
+            print("il seçimi tamamlandı: $ilce");
           },
           koy: (koy) {
             _koy = koy;
-            print("il secimi tamamlandi: $koy");
+            print("il seçimi tamamlandı: $koy");
           },
           mahalle: (mahalle) {
             _mahalle = mahalle;
-            print("il secimi tamamlandi: $mahalle");
+            print("il seçimi tamamlandı: $mahalle");
           },
         ),
       ),
@@ -46,4 +44,4 @@ class _OrnekState extends State<Ornek> {
 }
  ```
 
-AdresGetir widget seklinde projenizin herhangi bir yerinde kullanabilirsiniz
+AdresGetir widget şeklinde projenizin herhangi bir yerinde kullanabilirsiniz
