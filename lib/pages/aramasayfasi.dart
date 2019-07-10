@@ -20,6 +20,8 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
   String aranan = "il";
   String kod = "";
   Function secim;
+  Color barRengi;
+  Color yaziRengi;
 
   @override
   void didChangeDependencies() {
@@ -29,6 +31,9 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
     aranan = args['liste'];
     kod = args["kod"];
     secim = args['fonksiyon'];
+
+    barRengi = args['bar_rengi'] ?? Colors.blue;
+    yaziRengi = args['yazi_rengi'] ?? Colors.white;
 
     print(kod);
   }
@@ -67,14 +72,23 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: barRengi,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: yaziRengi,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: TextField(
           onChanged: filtrele,
           decoration: InputDecoration(
             hintText: "Arama Yap",
-            hintStyle: TextStyle(color: Colors.white),
+            hintStyle: TextStyle(color: yaziRengi),
           ),
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: yaziRengi),
         ),
         actions: <Widget>[
           FlatButton(
@@ -83,7 +97,7 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
             },
             child: Text(
               "Tamam",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: yaziRengi),
             ),
           ),
         ],

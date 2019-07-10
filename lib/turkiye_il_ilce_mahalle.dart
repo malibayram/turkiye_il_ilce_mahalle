@@ -6,9 +6,16 @@ import 'pages/aramasayfasi.dart';
 class Il extends StatefulWidget {
   final Function fonksiyon;
   final Widget child;
+  final Color barRengi;
+  final Color yaziRengi;
 
-  const Il({Key key, @required this.fonksiyon, @required this.child})
-      : super(key: key);
+  const Il({
+    Key key,
+    @required this.fonksiyon,
+    @required this.child,
+    this.barRengi,
+    this.yaziRengi,
+  }) : super(key: key);
 
   @override
   _IlState createState() => _IlState();
@@ -35,6 +42,8 @@ class _IlState extends State<Il> {
                 "liste": "il",
                 "kod": "",
                 "fonksiyon": ilSecimiYap,
+                "bar_rengi": widget.barRengi,
+                "yazi_rengi": widget.yaziRengi,
               });
             },
           ),
@@ -50,14 +59,18 @@ class Ilce extends StatefulWidget {
   final Widget child;
   final String ilKodu;
   final bool ilVarMi;
+  final Color barRengi;
+  final Color yaziRengi;
 
-  const Ilce(
-      {Key key,
-      @required this.fonksiyon,
-      @required this.child,
-      @required this.ilKodu,
-      @required this.ilVarMi})
-      : super(key: key);
+  const Ilce({
+    Key key,
+    @required this.fonksiyon,
+    @required this.child,
+    @required this.ilKodu,
+    @required this.ilVarMi,
+    this.barRengi,
+    this.yaziRengi,
+  }) : super(key: key);
 
   @override
   _IlceState createState() => _IlceState();
@@ -85,6 +98,8 @@ class _IlceState extends State<Ilce> {
                   "liste": "ilce",
                   "kod": widget.ilKodu,
                   "fonksiyon": ilceSecimiYap,
+                  "bar_rengi": widget.barRengi,
+                  "yazi_rengi": widget.yaziRengi,
                 });
               },
             ),
@@ -101,14 +116,18 @@ class Koy extends StatefulWidget {
   final Widget child;
   final String ilceKodu;
   final bool ilceVarMi;
+  final Color barRengi;
+  final Color yaziRengi;
 
-  const Koy(
-      {Key key,
-      @required this.fonksiyon,
-      @required this.child,
-      @required this.ilceKodu,
-      @required this.ilceVarMi})
-      : super(key: key);
+  const Koy({
+    Key key,
+    @required this.fonksiyon,
+    @required this.child,
+    @required this.ilceKodu,
+    @required this.ilceVarMi,
+    this.barRengi,
+    this.yaziRengi,
+  }) : super(key: key);
 
   @override
   _KoyState createState() => _KoyState();
@@ -136,6 +155,8 @@ class _KoyState extends State<Koy> {
                   "liste": "koy",
                   "kod": widget.ilceKodu,
                   "fonksiyon": koySecimiYap,
+                  "bar_rengi": widget.barRengi,
+                  "yazi_rengi": widget.yaziRengi,
                 });
               },
             ),
@@ -152,14 +173,18 @@ class Mahalle extends StatefulWidget {
   final Widget child;
   final String koyKodu;
   final bool koyVarMi;
+  final Color barRengi;
+  final Color yaziRengi;
 
-  const Mahalle(
-      {Key key,
-      @required this.fonksiyon,
-      @required this.child,
-      @required this.koyKodu,
-      @required this.koyVarMi})
-      : super(key: key);
+  const Mahalle({
+    Key key,
+    @required this.fonksiyon,
+    @required this.child,
+    @required this.koyKodu,
+    @required this.koyVarMi,
+    this.barRengi,
+    this.yaziRengi,
+  }) : super(key: key);
 
   @override
   _MahalleState createState() => _MahalleState();
@@ -187,6 +212,8 @@ class _MahalleState extends State<Mahalle> {
                   "liste": "mahalle",
                   "kod": widget.koyKodu,
                   "fonksiyon": mahalleSecimiYap,
+                  "bar_rengi": widget.barRengi,
+                  "yazi_rengi": widget.yaziRengi,
                 });
               },
             ),

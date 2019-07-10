@@ -15,6 +15,7 @@ class Ornek extends StatefulWidget {
 }
 
 class _OrnekState extends State<Ornek> {
+  // Öncelikle Map tipinde il, ilçe, köy ve mahalle değişkenlerimizi tanımlıyoruz
   Map _ilM = {"il": "İl Seçimi Yapın"};
   Map _ilceM = {"ilce": "İlçe Seçimi Yapın"};
   Map _koyM = {"koy": "Köy Seçimi Yapın"};
@@ -43,14 +44,28 @@ class _OrnekState extends State<Ornek> {
                 ),
               ),
             ),
+            // İller arasında seçim yapmak için kullanacağımız Il widgetini oluşturuyoruz
             Il(
               fonksiyon: (Map gelenDeger) {
-                _ilM = gelenDeger;
-                _ilceM = {"ilce": "İlçe Seçimi Yapın"};
-                _koyM = {"koy": "Köy Seçimi Yapın"};
-                _mahalleM = {"mahalle": "Mahalle Seçimi Yapın"};
+                /* Map türünde geri dönüş yapacak olan fonksiyonumuzu oluşturuyoruz */
+                _ilM =
+                    gelenDeger; /* Fonksiyonun döndürdüğü değeri oluşturduğumuz il değişkenine atıyoruz */
+                _ilceM = {
+                  "ilce": "İlçe Seçimi Yapın"
+                }; /* Daha önce seçim yapılmış olma ihtimaline binaen seçimi sıfırlıyoruz */
+                _koyM = {
+                  "koy": "Köy Seçimi Yapın"
+                }; /* Daha önce seçim yapılmış olma ihtimaline binaen seçimi sıfırlıyoruz */
+                _mahalleM = {
+                  "mahalle": "Mahalle Seçimi Yapın"
+                }; /* Daha önce seçim yapılmış olma ihtimaline binaen seçimi sıfırlıyoruz */
               },
               child: Text("${_ilM['il']}"),
+              /* İstediğimiz herhangi bir widgeti buraya child olarak ekliyoruz */
+              barRengi: Colors.amber,
+              /* Açılacak olan seçim sayfasının bar ve yazı rengini İSTEĞE BAĞLI olarak değiştiriyoruz -Bu adım zorun değil- */
+              yaziRengi: Colors
+                  .blue, /* Açılacak olan seçim sayfasının bar ve yazı rengini İSTEĞE BAĞLI olarak değiştiriyoruz -Bu adım zorun değil- */
             ),
             Align(
               alignment: Alignment.topLeft,
