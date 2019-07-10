@@ -6,3 +6,5 @@ adresgetir widgeti, il, ilçe, köy ve mahalle şeklinde ayrıldı
 
 * bar ve yazı rengi değiştirme seçeneği eklendi
 
+## [0.1.3] - Lisans Eklendi
+
