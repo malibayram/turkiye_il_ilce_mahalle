@@ -3,249 +3,197 @@ library turkiye_il_ilce_mahalle;
 import 'package:flutter/material.dart';
 import 'pages/aramasayfasi.dart';
 
-class AdresGetir extends StatefulWidget {
-  final Function il;
-  final Function ilce;
-  final Function koy;
-  final Function mahalle;
+class Il extends StatefulWidget {
+  final Function fonksiyon;
+  final Widget child;
 
-  const AdresGetir(
-      {Key key,
-      @required this.il,
-      @required this.ilce,
-      @required this.koy,
-      @required this.mahalle})
+  const Il({Key key, @required this.fonksiyon, @required this.child})
       : super(key: key);
 
   @override
-  _AdresGetirState createState() => _AdresGetirState();
+  _IlState createState() => _IlState();
 }
 
-class _AdresGetirState extends State<AdresGetir> {
+class _IlState extends State<Il> {
   Map _il = {"il": "İl Seçimi Yapın"};
-  Map _ilce = {"ilce": "İlçe Seçimi Yapın"};
-  Map _koy = {"koy": "Köy Seçimi Yapın"};
-  Map _mahalle = {"mahalle": "Mahalle Seçimi Yapın"};
 
   ilSecimiYap(Map secim) {
     _il = secim;
-    _ilce = {"ilce": "İlçe Seçimi Yapın"};
-    _koy = {"koy": "Köy Seçimi Yapın"};
-    _mahalle = {"mahalle": "Mahalle Seçimi Yapın"};
-    widget.il(_il['il']);
-    print(_il['il']);
+    widget.fonksiyon(_il);
+    print("Seçilen il: ${_il['il']}");
   }
-
-  ilceSecimiYap(Map secim) {
-    _ilce = secim;
-    _koy = {"koy": "Köy Seçimi Yapın"};
-    _mahalle = {"mahalle": "Mahalle Seçimi Yapın"};
-    widget.ilce(_ilce['ilce']);
-    print(_ilce['ilce']);
-  }
-
-  koySecimiYap(Map secim) {
-    _koy = secim;
-    _mahalle = {"mahalle": "Mahalle Seçimi Yapın"};
-    widget.koy(_koy['koy']);
-    print(_koy['koy']);
-  }
-
-  mahalleSecimiYap(Map secim) {
-    _mahalle = secim;
-    widget.mahalle(_mahalle['mahalle']);
-    print(_mahalle['mahalle']);
-  }
-
-  Text baslikil = Text(
-    "İl",
-    style: TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 20.0,
-      color: Color(0xFF333333),
-    ),
-  );
-
-  Text baslikilce = Text(
-    "İlçe",
-    style: TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 20.0,
-      color: Color(0xFF333333),
-    ),
-  );
-
-  Text baslikkoy = Text(
-    "Köy",
-    style: TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 20.0,
-      color: Color(0xFF333333),
-    ),
-  );
-
-  Text baslikmh = Text(
-    "Mahalle",
-    style: TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 20.0,
-      color: Color(0xFF333333),
-    ),
-  );
-
-  double genislik = 320;
-
-  Color containerRengi = Colors.white;
-  Color cerceveRengi = Colors.white;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: baslikil,
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return AdresAramaSyf({
-                      "liste": "il",
-                      "kod": "",
-                      "fonksiyon": ilSecimiYap,
-                    });
-                  },
-                ),
-              );
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) {
+              return AdresAramaSyf({
+                "liste": "il",
+                "kod": "",
+                "fonksiyon": ilSecimiYap,
+              });
             },
-            child: Container(
-              width: genislik,
-              padding: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: containerRengi,
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(width: 1.0, color: cerceveRengi),
-              ),
-              child: Text(_il['il']),
-            ),
           ),
-          SizedBox(height: 8.0),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: baslikilce,
+        );
+      },
+      child: widget.child,
+    );
+  }
+}
+
+class Ilce extends StatefulWidget {
+  final Function fonksiyon;
+  final Widget child;
+  final String ilKodu;
+  final bool ilVarMi;
+
+  const Ilce(
+      {Key key,
+      @required this.fonksiyon,
+      @required this.child,
+      @required this.ilKodu,
+      @required this.ilVarMi})
+      : super(key: key);
+
+  @override
+  _IlceState createState() => _IlceState();
+}
+
+class _IlceState extends State<Ilce> {
+  Map _ilce = {"ilce": "İlce Seçimi Yapın"};
+
+  ilceSecimiYap(Map secim) {
+    _ilce = secim;
+    widget.fonksiyon(_ilce);
+    print("Seçilen ilce: ${_ilce['ilce']}");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        if (widget.ilVarMi) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return AdresAramaSyf({
+                  "liste": "ilce",
+                  "kod": widget.ilKodu,
+                  "fonksiyon": ilceSecimiYap,
+                });
+              },
             ),
-          ),
-          InkWell(
-            onTap: _il['il'] == "İl Seçimi Yapın"
-                ? null
-                : () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return AdresAramaSyf({
-                            "liste": "ilce",
-                            "kod": _il['id'],
-                            "fonksiyon": ilceSecimiYap
-                          });
-                        },
-                      ),
-                    );
-                  },
-            child: Container(
-              width: genislik,
-              padding: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: containerRengi,
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(width: 1.0, color: cerceveRengi),
-              ),
-              child: Text(_ilce['ilce']),
+          );
+        }
+      },
+      child: widget.child,
+    );
+  }
+}
+
+class Koy extends StatefulWidget {
+  final Function fonksiyon;
+  final Widget child;
+  final String ilceKodu;
+  final bool ilceVarMi;
+
+  const Koy(
+      {Key key,
+      @required this.fonksiyon,
+      @required this.child,
+      @required this.ilceKodu,
+      @required this.ilceVarMi})
+      : super(key: key);
+
+  @override
+  _KoyState createState() => _KoyState();
+}
+
+class _KoyState extends State<Koy> {
+  Map _koy = {"koy": "Köy Seçimi Yapın"};
+
+  koySecimiYap(Map secim) {
+    _koy = secim;
+    widget.fonksiyon(_koy);
+    print("Seçilen köy: ${_koy['koy']}");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        if (widget.ilceVarMi) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return AdresAramaSyf({
+                  "liste": "koy",
+                  "kod": widget.ilceKodu,
+                  "fonksiyon": koySecimiYap,
+                });
+              },
             ),
-          ),
-          SizedBox(height: 8.0),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: baslikkoy,
+          );
+        }
+      },
+      child: widget.child,
+    );
+  }
+}
+
+class Mahalle extends StatefulWidget {
+  final Function fonksiyon;
+  final Widget child;
+  final String koyKodu;
+  final bool koyVarMi;
+
+  const Mahalle(
+      {Key key,
+      @required this.fonksiyon,
+      @required this.child,
+      @required this.koyKodu,
+      @required this.koyVarMi})
+      : super(key: key);
+
+  @override
+  _MahalleState createState() => _MahalleState();
+}
+
+class _MahalleState extends State<Mahalle> {
+  Map _mahalle = {"mahalle": "Mahalle Seçimi Yapın"};
+
+  mahalleSecimiYap(Map secim) {
+    _mahalle = secim;
+    widget.fonksiyon(_mahalle);
+    print("Seçilen Mahalle: ${_mahalle['mahalle']}");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        if (widget.koyVarMi) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return AdresAramaSyf({
+                  "liste": "mahalle",
+                  "kod": widget.koyKodu,
+                  "fonksiyon": mahalleSecimiYap,
+                });
+              },
             ),
-          ),
-          InkWell(
-            onTap: _ilce['ilce'] == "İlçe Seçimi Yapın"
-                ? null
-                : () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return AdresAramaSyf({
-                            "liste": "koy",
-                            "kod": _ilce['id'],
-                            "fonksiyon": koySecimiYap
-                          });
-                        },
-                      ),
-                    );
-                  },
-            child: Container(
-              width: genislik,
-              padding: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: containerRengi,
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(width: 1.0, color: cerceveRengi),
-              ),
-              child: Text(_koy['koy']),
-            ),
-          ),
-          SizedBox(height: 8.0),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: baslikmh,
-            ),
-          ),
-          InkWell(
-            onTap: _koy['koy'] == "Köy Seçimi Yapın"
-                ? null
-                : () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return AdresAramaSyf({
-                            "liste": "mahalle",
-                            "kod": _koy['id'],
-                            "fonksiyon": mahalleSecimiYap,
-                          });
-                        },
-                      ),
-                    );
-                  },
-            child: Container(
-              width: genislik,
-              padding: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: containerRengi,
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(width: 1.0, color: cerceveRengi),
-              ),
-              child: Text(_mahalle['mahalle']),
-            ),
-          ),
-        ],
-      ),
+          );
+        }
+      },
+      child: widget.child,
     );
   }
 }

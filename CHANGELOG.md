@@ -39,3 +39,7 @@
 
 * TODO: Describe initial release.
 
+## [0.1.1] - Widgets divided
+
+adresgetir widgeti, il, ilçe, köy ve mahalle şeklinde ayrıldı
+

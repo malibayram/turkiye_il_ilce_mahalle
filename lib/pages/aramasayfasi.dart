@@ -15,10 +15,6 @@ class AdresAramaSyf extends StatefulWidget {
 }
 
 class _AdresAramaSyfState extends State<AdresAramaSyf> {
-  final String tag = "AdresAramaSyf";
-
-  List liste = [];
-
   int secili = 0;
   String k = "";
   String aranan = "il";
@@ -38,6 +34,7 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
   }
 
   Future<List> listeOlustur() async {
+    List liste = [];
     switch (aranan) {
       case 'ilce':
         liste = json.decode(Ilce.ilce);
