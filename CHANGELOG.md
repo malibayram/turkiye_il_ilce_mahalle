@@ -8,3 +8,7 @@ adresgetir widgeti, il, ilçe, köy ve mahalle şeklinde ayrıldı
 
 ## [0.1.3] - Lisans Eklendi
 
+## [0.1.4] - Ufak bir düzeltme yapıldı
+
+## [0.1.5] - Paketin veri kullanımı internet üzerinden gerçekleşecek şekilde yeniden düzenlenerek boyutu düşürüldü, cadde, sokak, bina ve daire seçimi eklendi
+

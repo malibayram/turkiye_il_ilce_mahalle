@@ -22,12 +22,12 @@ class Il extends StatefulWidget {
 }
 
 class _IlState extends State<Il> {
-  Map _il = {"il": "İl Seçimi Yapın"};
+  Map _il = {"bilesenAdi": "İl Seçimi Yapın"};
 
   ilSecimiYap(Map secim) {
     _il = secim;
     widget.fonksiyon(_il);
-    print("Seçilen il: ${_il['il']}");
+    print("Seçilen il: ${_il['bilesenAdi']}");
   }
 
   @override
@@ -77,12 +77,12 @@ class Ilce extends StatefulWidget {
 }
 
 class _IlceState extends State<Ilce> {
-  Map _ilce = {"ilce": "İlce Seçimi Yapın"};
+  Map _ilce = {"bilesenAdi": "İlce Seçimi Yapın"};
 
   ilceSecimiYap(Map secim) {
     _ilce = secim;
     widget.fonksiyon(_ilce);
-    print("Seçilen ilce: ${_ilce['ilce']}");
+    print("Seçilen ilce: ${_ilce['bilesenAdi']}");
   }
 
   @override
@@ -111,7 +111,7 @@ class _IlceState extends State<Ilce> {
   }
 }
 
-class Koy extends StatefulWidget {
+class Mahalle extends StatefulWidget {
   final Function fonksiyon;
   final Widget child;
   final String ilceKodu;
@@ -119,7 +119,7 @@ class Koy extends StatefulWidget {
   final Color barRengi;
   final Color yaziRengi;
 
-  const Koy({
+  const Mahalle({
     Key key,
     @required this.fonksiyon,
     @required this.child,
@@ -130,16 +130,16 @@ class Koy extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _KoyState createState() => _KoyState();
+  _MahalleState createState() => _MahalleState();
 }
 
-class _KoyState extends State<Koy> {
-  Map _koy = {"koy": "Köy Seçimi Yapın"};
+class _MahalleState extends State<Mahalle> {
+  Map _mahalle = {"bilesenAdi": "Mahalle Seçimi Yapın"};
 
-  koySecimiYap(Map secim) {
-    _koy = secim;
-    widget.fonksiyon(_koy);
-    print("Seçilen köy: ${_koy['koy']}");
+  mahalleSecimiYap(Map secim) {
+    _mahalle = secim;
+    widget.fonksiyon(_mahalle);
+    print("Seçilen Mahalle: ${_mahalle['bilesenAdi']}");
   }
 
   @override
@@ -152,9 +152,9 @@ class _KoyState extends State<Koy> {
             MaterialPageRoute(
               builder: (BuildContext context) {
                 return AdresAramaSyf({
-                  "liste": "koy",
+                  "liste": "mahalle",
                   "kod": widget.ilceKodu,
-                  "fonksiyon": koySecimiYap,
+                  "fonksiyon": mahalleSecimiYap,
                   "bar_rengi": widget.barRengi,
                   "yazi_rengi": widget.yaziRengi,
                 });
@@ -168,50 +168,174 @@ class _KoyState extends State<Koy> {
   }
 }
 
-class Mahalle extends StatefulWidget {
+class Yol extends StatefulWidget {
   final Function fonksiyon;
   final Widget child;
-  final String koyKodu;
-  final bool koyVarMi;
+  final String mahalleKodu;
+  final bool mahalleVarMi;
   final Color barRengi;
   final Color yaziRengi;
 
-  const Mahalle({
+  const Yol({
     Key key,
     @required this.fonksiyon,
     @required this.child,
-    @required this.koyKodu,
-    @required this.koyVarMi,
+    @required this.mahalleKodu,
+    @required this.mahalleVarMi,
     this.barRengi,
     this.yaziRengi,
   }) : super(key: key);
 
   @override
-  _MahalleState createState() => _MahalleState();
+  _YolState createState() => _YolState();
 }
 
-class _MahalleState extends State<Mahalle> {
-  Map _mahalle = {"mahalle": "Mahalle Seçimi Yapın"};
+class _YolState extends State<Yol> {
+  Map _yol = {"bilesenAdi": "Yol Seçimi Yapın"};
 
-  mahalleSecimiYap(Map secim) {
-    _mahalle = secim;
-    widget.fonksiyon(_mahalle);
-    print("Seçilen Mahalle: ${_mahalle['mahalle']}");
+  yolSecimiYap(Map secim) {
+    _yol = secim;
+    widget.fonksiyon(_yol);
+    print("Seçilen Yol: ${_yol['bilesenAdi']}");
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (widget.koyVarMi) {
+        if (widget.mahalleVarMi) {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (BuildContext context) {
                 return AdresAramaSyf({
-                  "liste": "mahalle",
-                  "kod": widget.koyKodu,
-                  "fonksiyon": mahalleSecimiYap,
+                  "liste": "yol",
+                  "kod": widget.mahalleKodu,
+                  "fonksiyon": yolSecimiYap,
+                  "bar_rengi": widget.barRengi,
+                  "yazi_rengi": widget.yaziRengi,
+                });
+              },
+            ),
+          );
+        }
+      },
+      child: widget.child,
+    );
+  }
+}
+
+class Bina extends StatefulWidget {
+  final Function fonksiyon;
+  final Widget child;
+  final String yolKodu;
+  final bool yolVarMi;
+  final String mahalleKodu;
+  final bool mahalleVarMi;
+  final Color barRengi;
+  final Color yaziRengi;
+
+  const Bina({
+    Key key,
+    @required this.fonksiyon,
+    @required this.child,
+    @required this.yolKodu,
+    @required this.yolVarMi,
+    this.mahalleKodu,
+    this.mahalleVarMi,
+    this.barRengi,
+    this.yaziRengi,
+  }) : super(key: key);
+
+  @override
+  _BinaState createState() => _BinaState();
+}
+
+class _BinaState extends State<Bina> {
+  Map _bina = {"bilesenAdi": "Bina Seçimi Yapın"};
+
+  binaSecimiYap(Map secim) {
+    _bina = secim;
+    widget.fonksiyon(_bina);
+    print("Seçilen Bina: ${_bina['bilesenAdi']}");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        if (widget.yolVarMi) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return AdresAramaSyf({
+                  "liste": "bina",
+                  "kod": widget.mahalleKodu,
+                  "kod2": widget.yolKodu,
+                  "fonksiyon": binaSecimiYap,
+                  "bar_rengi": widget.barRengi,
+                  "yazi_rengi": widget.yaziRengi,
+                });
+              },
+            ),
+          );
+        }
+      },
+      child: widget.child,
+    );
+  }
+}
+
+class Daire extends StatefulWidget {
+  final Function fonksiyon;
+  final Widget child;
+  final String binaKodu;
+  final bool binaVarMi;
+  final String mahalleKodu;
+  final bool mahalleVarMi;
+  final Color barRengi;
+  final Color yaziRengi;
+
+  const Daire({
+    Key key,
+    @required this.fonksiyon,
+    @required this.child,
+    @required this.binaKodu,
+    @required this.binaVarMi,
+    this.mahalleKodu,
+    this.mahalleVarMi,
+    this.barRengi,
+    this.yaziRengi,
+  }) : super(key: key);
+
+  @override
+  _DaireState createState() => _DaireState();
+}
+
+class _DaireState extends State<Daire> {
+  Map _daire = {"bilesenAdi": "Daire Seçimi Yapın"};
+
+  daireSecimiYap(Map secim) {
+    _daire = secim;
+    widget.fonksiyon(_daire);
+    print("Seçilen Daire: ${_daire['bilesenAdi']}");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        if (widget.binaVarMi) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return AdresAramaSyf({
+                  "liste": "daire",
+                  "kod": widget.mahalleKodu,
+                  "kod2": widget.binaKodu,
+                  "fonksiyon": daireSecimiYap,
                   "bar_rengi": widget.barRengi,
                   "yazi_rengi": widget.yaziRengi,
                 });
