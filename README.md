@@ -1,6 +1,10 @@
 # turkiye_il_ilce_mahalle
 Türkiye İl İlçe Köy Mahalle veritabanına bağlı olarak adres seçme flutter paketi
 
+### Önemli not:
+- Paket verileri [https://adres.nvi.gov.tr/VatandasIslemleri/AdresSorgu](https://adres.nvi.gov.tr/VatandasIslemleri/AdresSorgu) adresinden alındığı için ileriki tarihlerde kaynak sitedeki sistemin değişmesi gibi nedenlerle verilere ulaşılmama durumu yaşanabilir.
+- 7 Haziran 2020 tarihinde çalışan örnek uygulamadan alınan ekran videosunu [buradan](https://youtu.be/-pIGYbtJtd0) izleyebilirsiniz.
+
 Flutter paketini kullanmak için
 - [buradan buyrun](https://pub.dev/packages/turkiye_il_ilce_mahalle)
 
@@ -56,6 +60,7 @@ class _OrnekState extends State<Ornek> {
                 _yolM = {"bilesenAdi": "Yol Seçimi Yapın"};
                 _binaM = {"bilesenAdi": "Bina Seçimi Yapın"};
                 _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
+                setState((){});
               },
               child: Text("${_ilM['bilesenAdi']}"),
               /* İstediğimiz herhangi bir widgeti buraya child olarak ekliyoruz */
@@ -87,6 +92,7 @@ class _OrnekState extends State<Ornek> {
                 _yolM = {"bilesenAdi": "Yol Seçimi Yapın"};
                 _binaM = {"bilesenAdi": "Bina Seçimi Yapın"};
                 _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
+                setState((){});
               },
               child: Text("${_ilceM['bilesenAdi']}"),
             ),
@@ -112,6 +118,7 @@ class _OrnekState extends State<Ornek> {
                 _yolM = {"bilesenAdi": "Yol Seçimi Yapın"};
                 _binaM = {"bilesenAdi": "Bina Seçimi Yapın"};
                 _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
+                setState((){});
               },
               child: Text("${_mahalleM['bilesenAdi']}"),
             ),
@@ -136,6 +143,7 @@ class _OrnekState extends State<Ornek> {
                 _yolM = gelenDeger;
                 _binaM = {"bilesenAdi": "Bina Seçimi Yapın"};
                 _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
+                setState((){});
               },
               child: Text("${_yolM['bilesenAdi']}"),
             ),
@@ -161,6 +169,7 @@ class _OrnekState extends State<Ornek> {
               fonksiyon: (Map gelenDeger) {
                 _binaM = gelenDeger;
                 _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
+                setState((){});
               },
               child: Text("${_binaM['bilesenAdi']}"),
             ),
@@ -185,6 +194,7 @@ class _OrnekState extends State<Ornek> {
               binaKodu: "${_binaM['kimlikNo']}",
               fonksiyon: (Map gelenDeger) {
                 _daireM = gelenDeger;
+                setState((){});
               },
               child: Text("${_daireM['bilesenAdi']}"),
             ),

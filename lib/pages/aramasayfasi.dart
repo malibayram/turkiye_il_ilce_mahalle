@@ -41,7 +41,6 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
         'kTaxOjzJrcPecdIDtdHAo0iwnkKEdkkciFQT1Iozqg5DWPRBEARFXyOHOducZ57_Val23M6OfyF4VJC2ZLD5A9cuNkM1',
     'Cookie':
         '__RequestVerificationToken=T7zackMfqPKyYpnFXJW3LUANaSNvdp6Q_c-qtkGxFH8Muv53YJ7g4TWQHnW3O0JhD7MSLDsR_PPUaxZubJeEkXE1MYY1; browser-check=%22done%22',
-    'Accept-Encoding': 'gzip',
   };
 
   @override
@@ -95,8 +94,7 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
   }
 
   Future<List> ilGetir() async {
-    http.Response res = await http
-        .post('https://adres.nvi.gov.tr/Harita/ilListesi', headers: headers);
+    http.Response res = await http.post('https://adres.nvi.gov.tr/Harita/ilListesi', headers: headers);
     if (res.statusCode != 200) {
       print('post error: statusCode= ${res.statusCode}');
       return [];
@@ -237,14 +235,8 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
           ? ListView.builder(
               itemCount: liste.length,
               itemBuilder: (ctx, i) {
-                if (liste[i]['bilesenAdi']
-                        .toString()
-                        .toUpperCase()
-                        .contains(k.toUpperCase()) ||
-                    liste[i]['bilesenAdi']
-                        .toString()
-                        .toLowerCase()
-                        .contains(k.toLowerCase())) {
+                if (liste[i]['bilesenAdi'].toString().toUpperCase().contains(k.toUpperCase()) ||
+                    liste[i]['bilesenAdi'].toString().toLowerCase().contains(k.toLowerCase())) {
                   return ListTile(
                     selected: liste[i]['kimlikNo'] == secili,
                     onTap: () {
@@ -253,9 +245,7 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
                       setState(() {});
                     },
                     title: Text(liste[i]['bilesenAdi'] ?? ''),
-                    trailing: liste[i]['kimlikNo'] == secili
-                        ? Icon(Icons.check)
-                        : null,
+                    trailing: liste[i]['kimlikNo'] == secili ? Icon(Icons.check) : null,
                   );
                 } else {
                   return SizedBox(height: 0);

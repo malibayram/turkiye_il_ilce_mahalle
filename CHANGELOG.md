@@ -13,3 +13,8 @@ adresgetir widgeti, il, ilçe, köy ve mahalle şeklinde ayrıldı
 ## [0.1.5] - Paketin veri kullanımı internet üzerinden gerçekleşecek şekilde yeniden düzenlenerek boyutu düşürüldü, cadde, sokak, bina ve daire seçimi eklendi
 
 ## [0.1.6] - Dart 2.5.0 versiyonuna güncellendi
+
+## [0.1.8] - Ufak düzeltmeler
+* Örnek kullanımında setState eklendi.
+* Dart versiyonu 2.7.0'a yükseltildi
+* http kütüphanesi 0.12.1'e yükseltildi

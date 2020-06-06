@@ -51,8 +51,7 @@ class _OrnekState extends State<Ornek> {
               fonksiyon: (Map gelenDeger) {
                 print(gelenDeger.toString());
                 /* Map türünde geri dönüş yapacak olan fonksiyonumuzu oluşturuyoruz */
-                _ilM =
-                    gelenDeger; /* Fonksiyonun döndürdüğü değeri oluşturduğumuz il değişkenine atıyoruz */
+                _ilM = gelenDeger; /* Fonksiyonun döndürdüğü değeri oluşturduğumuz il değişkenine atıyoruz */
                 _ilceM = {
                   "bilesenAdi": "İlçe Seçimi Yapın"
                 }; /* Daha önce seçim yapılmış olma ihtimaline binaen seçimi sıfırlıyoruz */
@@ -62,6 +61,7 @@ class _OrnekState extends State<Ornek> {
                 _yolM = {"bilesenAdi": "Yol Seçimi Yapın"};
                 _binaM = {"bilesenAdi": "Bina Seçimi Yapın"};
                 _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
+                setState(() {});
               },
               child: Text("${_ilM['bilesenAdi']}"),
               /* İstediğimiz herhangi bir widgeti buraya child olarak ekliyoruz */
@@ -93,6 +93,7 @@ class _OrnekState extends State<Ornek> {
                 _yolM = {"bilesenAdi": "Yol Seçimi Yapın"};
                 _binaM = {"bilesenAdi": "Bina Seçimi Yapın"};
                 _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
+                setState(() {});
               },
               child: Text("${_ilceM['bilesenAdi']}"),
             ),
@@ -118,6 +119,7 @@ class _OrnekState extends State<Ornek> {
                 _yolM = {"bilesenAdi": "Yol Seçimi Yapın"};
                 _binaM = {"bilesenAdi": "Bina Seçimi Yapın"};
                 _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
+                setState(() {});
               },
               child: Text("${_mahalleM['bilesenAdi']}"),
             ),
@@ -142,6 +144,7 @@ class _OrnekState extends State<Ornek> {
                 _yolM = gelenDeger;
                 _binaM = {"bilesenAdi": "Bina Seçimi Yapın"};
                 _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
+                setState(() {});
               },
               child: Text("${_yolM['bilesenAdi']}"),
             ),
@@ -167,6 +170,7 @@ class _OrnekState extends State<Ornek> {
               fonksiyon: (Map gelenDeger) {
                 _binaM = gelenDeger;
                 _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
+                setState(() {});
               },
               child: Text("${_binaM['bilesenAdi']}"),
             ),
@@ -191,6 +195,7 @@ class _OrnekState extends State<Ornek> {
               binaKodu: "${_binaM['kimlikNo']}",
               fonksiyon: (Map gelenDeger) {
                 _daireM = gelenDeger;
+                setState(() {});
               },
               child: Text("${_daireM['bilesenAdi']}"),
             ),
