@@ -1,6 +1,6 @@
 name: turkiye_il_ilce_mahalle
 description: Turkiye Il Ilce Koy Mahalle Cadde Sokak Apartman ve Daire veritabanina bagli olarak adres secme flutter paketi
-version: 0.2.0
+version: 0.3.0
 homepage: https://github.com/malibayram91/turkiye_il_ilce_mahalle
 
 environment:
@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  http: ^1.0.0
+  http: ^1.6.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

@@ -1,3 +1,11 @@
+## [0.3.0] - 2025-12-05
+
+- Refactored to use `http` package (removed `dio` dependency).
+- Removed `Yol`, `Bina`, `Daire` widgets.
+- Updated `AdresAramaSyf` to use `TurkiyeLocationService`.
+- Improved example app with strict selection order.
+- Updated documentation.
+
 ## [0.2.0] - 2025-12-05
 
 - Migrated to Null Safety.

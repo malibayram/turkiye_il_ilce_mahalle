@@ -1,207 +1,100 @@
-# turkiye_il_ilce_mahalle
-Türkiye İl İlçe Köy Mahalle veritabanına bağlı olarak adres seçme flutter paketi
+# Turkiye Il Ilce Mahalle
 
-### Önemli not:
-- Paket verileri [https://adres.nvi.gov.tr/VatandasIslemleri/AdresSorgu](https://adres.nvi.gov.tr/VatandasIslemleri/AdresSorgu) adresinden alındığı için ileriki tarihlerde kaynak sitedeki sistemin değişmesi gibi nedenlerle verilere ulaşılmama durumu yaşanabilir.
-- 7 Haziran 2020 tarihinde çalışan örnek uygulamadan alınan ekran videosunu [buradan](https://youtu.be/-pIGYbtJtd0) izleyebilirsiniz.
+Türkiye'deki İl, İlçe ve Mahalle verilerini seçmenizi sağlayan, kullanımı kolay ve güncel bir Flutter paketi.
 
-Flutter paketini kullanmak için
-- [buradan buyrun](https://pub.dev/packages/turkiye_il_ilce_mahalle)
+Bu paket, [TurkiyeAPI](https://turkiyeapi.dev/) servisini kullanarak en güncel adres verilerini sağlar.
 
-## How to use
-Paketi aşağıdaki şekilde kullanabilirsiniz.
+## Özellikler
+
+- ✅ **Güncel Veriler**: TurkiyeAPI üzerinden anlık ve güncel veriler.
+- ✅ **Null Safety**: Tamamen null-safe kod yapısı.
+- ✅ **Kolay Kullanım**: `Il`, `Ilce` ve `Mahalle` widget'ları ile hızlı entegrasyon.
+- ✅ **Özelleştirilebilir**: Renk ve stil seçenekleri.
+
+## Kurulum
+
+`pubspec.yaml` dosyanıza paketi ekleyin:
+
+```yaml
+dependencies:
+  turkiye_il_ilce_mahalle: ^0.3.0
+```
+
+## Kullanım
+
+Paketi projenize dahil edin:
 
 ```dart
-class _OrnekState extends State<Ornek> {
-  // Öncelikle Map tipinde il, ilçe, köy ve mahalle değişkenlerimizi tanımlıyoruz
-  Map _ilM = {"bilesenAdi": "İl Seçimi Yapın"};
-  Map _ilceM = {"bilesenAdi": "İlçe Seçimi Yapın"};
-  Map _mahalleM = {"bilesenAdi": "Mahalle Seçimi Yapın"};
-  Map _yolM = {"bilesenAdi": "Yol Seçimi Yapın"};
-  Map _binaM = {"bilesenAdi": "Bina Seçimi Yapın"};
-  Map _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
+import 'package:turkiye_il_ilce_mahalle/turkiye_il_ilce_mahalle.dart';
+```
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Adres Seçimi"),
-      ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "İl",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                    color: Color(0xFF333333),
-                  ),
-                ),
-              ),
-            ),
-            // İller arasında seçim yapmak için kullanacağımız Il widgetini oluşturuyoruz
-            Il(
-              fonksiyon: (Map gelenDeger) {
-                print(gelenDeger.toString());
-                /* Map türünde geri dönüş yapacak olan fonksiyonumuzu oluşturuyoruz */
-                _ilM =
-                    gelenDeger; /* Fonksiyonun döndürdüğü değeri oluşturduğumuz il değişkenine atıyoruz */
-                _ilceM = {
-                  "bilesenAdi": "İlçe Seçimi Yapın"
-                }; /* Daha önce seçim yapılmış olma ihtimaline binaen seçimi sıfırlıyoruz */
-                _mahalleM = {
-                  "bilesenAdi": "Mahalle Seçimi Yapın"
-                }; /* Daha önce seçim yapılmış olma ihtimaline binaen seçimi sıfırlıyoruz */
-                _yolM = {"bilesenAdi": "Yol Seçimi Yapın"};
-                _binaM = {"bilesenAdi": "Bina Seçimi Yapın"};
-                _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
-                setState((){});
-              },
-              child: Text("${_ilM['bilesenAdi']}"),
-              /* İstediğimiz herhangi bir widgeti buraya child olarak ekliyoruz */
-              barRengi: Colors.amber,
-              /* Açılacak olan seçim sayfasının bar ve yazı rengini İSTEĞE BAĞLI olarak değiştiriyoruz -Bu adım zorun değil- */
-              yaziRengi: Colors
-                  .blue, /* Açılacak olan seçim sayfasının bar ve yazı rengini İSTEĞE BAĞLI olarak değiştiriyoruz -Bu adım zorun değil- */
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "İlçe",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                    color: Color(0xFF333333),
-                  ),
-                ),
-              ),
-            ),
-            Ilce(
-              ilVarMi: _ilM['bilesenAdi'] != "İl Seçimi Yapın",
-              ilKodu: "${_ilM['kimlikNo']}",
-              fonksiyon: (Map gelenDeger) {
-                _ilceM = gelenDeger;
-                _mahalleM = {"bilesenAdi": "Mahalle Seçimi Yapın"};
-                _yolM = {"bilesenAdi": "Yol Seçimi Yapın"};
-                _binaM = {"bilesenAdi": "Bina Seçimi Yapın"};
-                _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
-                setState((){});
-              },
-              child: Text("${_ilceM['bilesenAdi']}"),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Mahalle",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                    color: Color(0xFF333333),
-                  ),
-                ),
-              ),
-            ),
-            Mahalle(
-              ilceVarMi: _ilceM['bilesenAdi'] != "İlce Seçimi Yapın",
-              ilceKodu: "${_ilceM['kimlikNo']}",
-              fonksiyon: (Map gelenDeger) {
-                _mahalleM = gelenDeger;
-                _yolM = {"bilesenAdi": "Yol Seçimi Yapın"};
-                _binaM = {"bilesenAdi": "Bina Seçimi Yapın"};
-                _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
-                setState((){});
-              },
-              child: Text("${_mahalleM['bilesenAdi']}"),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Yol",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                    color: Color(0xFF333333),
-                  ),
-                ),
-              ),
-            ),
-            Yol(
-              mahalleVarMi: _mahalleM['bilesenAdi'] != "Mahalle Seçimi Yapın",
-              mahalleKodu: "${_mahalleM['kimlikNo']}",
-              fonksiyon: (Map gelenDeger) {
-                _yolM = gelenDeger;
-                _binaM = {"bilesenAdi": "Bina Seçimi Yapın"};
-                _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
-                setState((){});
-              },
-              child: Text("${_yolM['bilesenAdi']}"),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Bina",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                    color: Color(0xFF333333),
-                  ),
-                ),
-              ),
-            ),
-            Bina(
-              mahalleVarMi: _mahalleM['bilesenAdi'] != "Mahalle Seçimi Yapın",
-              mahalleKodu: "${_mahalleM['kimlikNo']}",
-              yolVarMi: _yolM['bilesenAdi'] != "Yol Seçimi Yapın",
-              yolKodu: "${_yolM['kimlikNo']}",
-              fonksiyon: (Map gelenDeger) {
-                _binaM = gelenDeger;
-                _daireM = {"bilesenAdi": "Daire Seçimi Yapın"};
-                setState((){});
-              },
-              child: Text("${_binaM['bilesenAdi']}"),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Daire",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                    color: Color(0xFF333333),
-                  ),
-                ),
-              ),
-            ),
-            Daire(
-              mahalleVarMi: _mahalleM['bilesenAdi'] != "Mahalle Seçimi Yapın",
-              mahalleKodu: "${_mahalleM['kimlikNo']}",
-              binaVarMi: _binaM['bilesenAdi'] != "Yol Seçimi Yapın",
-              binaKodu: "${_binaM['kimlikNo']}",
-              fonksiyon: (Map gelenDeger) {
-                _daireM = gelenDeger;
-                setState((){});
-              },
-              child: Text("${_daireM['bilesenAdi']}"),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+### Temel Kullanım
+
+Adres seçimi için `Il`, `Ilce` ve `Mahalle` widget'larını sırasıyla kullanabilirsiniz.
+
+```dart
+// Seçilen değerleri tutmak için değişkenler
+Map<String, dynamic> _il = {"bilesenAdi": "İl Seçimi Yapın"};
+Map<String, dynamic> _ilce = {"bilesenAdi": "İlçe Seçimi Yapın"};
+Map<String, dynamic> _mahalle = {"bilesenAdi": "Mahalle Seçimi Yapın"};
+
+// İl Seçimi
+Il(
+  fonksiyon: (Map<String, dynamic> gelenDeger) {
+    setState(() {
+      _il = gelenDeger;
+      // İl değişince alt seçimleri sıfırla
+      _ilce = {"bilesenAdi": "İlçe Seçimi Yapın"};
+      _mahalle = {"bilesenAdi": "Mahalle Seçimi Yapın"};
+    });
+  },
+  child: Text(_il['bilesenAdi']),
+),
+
+// İlçe Seçimi (İl seçildikten sonra gösterilmesi önerilir)
+if (_il['bilesenAdi'] != "İl Seçimi Yapın")
+  Ilce(
+    ilVarMi: true,
+    ilKodu: _il['kimlikNo'].toString(),
+    fonksiyon: (Map<String, dynamic> gelenDeger) {
+      setState(() {
+        _ilce = gelenDeger;
+        // İlçe değişince mahalleyi sıfırla
+        _mahalle = {"bilesenAdi": "Mahalle Seçimi Yapın"};
+      });
+    },
+    child: Text(_ilce['bilesenAdi']),
+  ),
+
+// Mahalle Seçimi (İlçe seçildikten sonra gösterilmesi önerilir)
+if (_ilce['bilesenAdi'] != "İlçe Seçimi Yapın")
+  Mahalle(
+    ilceVarMi: true,
+    ilceKodu: _ilce['kimlikNo'].toString(),
+    fonksiyon: (Map<String, dynamic> gelenDeger) {
+      setState(() {
+        _mahalle = gelenDeger;
+      });
+    },
+    child: Text(_mahalle['bilesenAdi']),
+  ),
+```
+
+## Veri Yapısı
+
+Seçim fonksiyonlarından dönen `Map<String, dynamic>` verisi şu yapıdadır:
+
+```dart
+{
+  "kimlikNo": "12345", // ID
+  "bilesenAdi": "Örnek Mahallesi" // İsim
 }
- ```
+```
+
+## Katkıda Bulunma
+
+Hata bildirimleri ve özellik istekleri için lütfen [GitHub Issues](https://github.com/malibayram91/turkiye_il_ilce_mahalle/issues) sayfasını kullanın.
+
+## Lisans
+
+MIT License

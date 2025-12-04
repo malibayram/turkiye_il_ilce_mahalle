@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:turkiye_il_ilce_mahalle/service/turkiye_location_service.dart';
 
 class AdresAramaSyf extends StatefulWidget {
   final Map<String, dynamic> gelen;
@@ -13,191 +11,71 @@ class AdresAramaSyf extends StatefulWidget {
 }
 
 class _AdresAramaSyfState extends State<AdresAramaSyf> {
-  int secili = 0;
-  String k = "";
-  String aranan = "il";
-  String kod = "";
-  String kod2 = "";
-  late Function(Map<String, dynamic>) secim;
-  Color? barRengi;
-  Color? yaziRengi;
-  bool veriVar = false;
-  List<dynamic>? liste;
   late Map<String, dynamic> args;
+  late String aranan;
+  String? kod;
+  late Function(Map<String, dynamic>) secim;
+  Color barRengi = Colors.blue;
+  Color yaziRengi = Colors.white;
 
-  var headers = {
-    'Sec-Fetch-Mode': 'cors',
-    'Sec-Fetch-Site': 'same-origin',
-    'Origin': 'https://adres.nvi.gov.tr',
-    'Accept-Encoding': 'gzip, deflate, br',
-    'Accept-Language': 'tr,ar;q=0.9,tr-TR;q=0.8,en-US;q=0.7,en;q=0.6',
-    'User-Agent':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36',
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    'Accept': '*/*',
-    'Referer': 'https://adres.nvi.gov.tr/VatandasIslemleri/AdresSorgu',
-    'X-Requested-With': 'XMLHttpRequest',
-    'Connection': 'keep-alive',
-    '__RequestVerificationToken':
-        'kTaxOjzJrcPecdIDtdHAo0iwnkKEdkkciFQT1Iozqg5DWPRBEARFXyOHOducZ57_Val23M6OfyF4VJC2ZLD5A9cuNkM1',
-    'Cookie':
-        '__RequestVerificationToken=T7zackMfqPKyYpnFXJW3LUANaSNvdp6Q_c-qtkGxFH8Muv53YJ7g4TWQHnW3O0JhD7MSLDsR_PPUaxZubJeEkXE1MYY1; browser-check=%22done%22',
-  };
+  final TurkiyeLocationService _service = TurkiyeLocationService();
+  List<Map<String, dynamic>> _dataList = [];
+  List<Map<String, dynamic>> _filteredList = [];
+  bool _isLoading = true;
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
+    super.initState();
     args = widget.gelen;
-    aranan = args['liste'] ?? 'il';
-    kod = args["kod"] ?? "";
-    if (aranan == "bina" || aranan == "daire") kod2 = args["kod2"] ?? "";
+    aranan = args['liste'];
+    kod = args["kod"];
     secim = args['fonksiyon'];
 
     barRengi = args['bar_rengi'] ?? Colors.blue;
     yaziRengi = args['yazi_rengi'] ?? Colors.white;
 
-    print(aranan);
-
-    listeOlustur();
-
-    super.initState();
+    _fetchData();
   }
 
-  listeOlustur() async {
-    veriVar = false;
-    setState(() {});
-    switch (aranan) {
-      case 'ilce':
-        if (liste == null) liste = await ilceGetir(kod);
-        break;
-
-      case 'mahalle':
-        if (liste == null) liste = await mahalleGetir(kod);
-        break;
-
-      case 'yol':
-        if (liste == null) liste = await yolGetir(kod);
-        break;
-
-      case 'bina':
-        if (liste == null) liste = await binaGetir(kod, kod2);
-        break;
-
-      case 'daire':
-        if (liste == null) liste = await daireGetir(kod, kod2);
-        break;
-
-      default:
-        if (liste == null) liste = await ilGetir();
-        break;
+  Future<void> _fetchData() async {
+    List<Map<String, dynamic>> result = [];
+    try {
+      if (aranan == "il") {
+        result = await _service.getProvinces();
+      } else if (aranan == "ilce" && kod != null) {
+        result = await _service.getDistricts(int.parse(kod!));
+      } else if (aranan == "mahalle" && kod != null) {
+        result = await _service.getNeighborhoods(int.parse(kod!));
+      }
+    } catch (e) {
+      debugPrint("Error fetching data: $e");
     }
-    veriVar = true;
-    setState(() {});
-  }
 
-  Future<List> ilGetir() async {
-    http.Response res = await http.post(
-        Uri.parse('https://adres.nvi.gov.tr/Harita/ilListesi'),
-        headers: headers);
-    if (res.statusCode != 200) {
-      print('post error: statusCode= ${res.statusCode}');
-      return [];
-    } else
-      return json.decode(res.body);
-  }
-
-  Future<List> ilceGetir(String il) async {
-    var data = 'ilKimlikNo=$il';
-
-    http.Response res = await http.post(
-      Uri.parse('https://adres.nvi.gov.tr/Harita/ilceListesi'),
-      headers: headers,
-      body: data,
-    );
-
-    if (res.statusCode != 200) {
-      print('post error: statusCode= ${res.statusCode}');
-      return [];
-    } else {
-      print(res.body);
-      return json.decode(res.body);
+    if (mounted) {
+      setState(() {
+        // Map API response keys to expected keys for backward compatibility
+        _dataList = result.map((item) {
+          return {
+            "kimlikNo": item['id'].toString(),
+            "bilesenAdi": item['name'],
+          };
+        }).toList();
+        _filteredList = _dataList;
+        _isLoading = false;
+      });
     }
   }
 
-  Future<List> mahalleGetir(String ilce) async {
-    var data = 'ilceKimlikNo=$ilce';
-
-    http.Response res = await http.post(
-      Uri.parse('https://adres.nvi.gov.tr/Harita/mahalleKoyBaglisiListesi'),
-      headers: headers,
-      body: data,
-    );
-
-    if (res.statusCode != 200) {
-      print('post error: statusCode= ${res.statusCode}');
-      return [];
-    } else {
-      print(res.body);
-      return json.decode(res.body);
-    }
-  }
-
-  Future<List> yolGetir(String mahalle) async {
-    var data = 'mahalleKoyBaglisiKimlikNo=$mahalle';
-
-    http.Response res = await http.post(
-      Uri.parse('https://adres.nvi.gov.tr/Harita/yolListesi'),
-      headers: headers,
-      body: data,
-    );
-
-    if (res.statusCode != 200) {
-      print('post error: statusCode= ${res.statusCode}');
-      return [];
-    } else {
-      print(res.body);
-      return json.decode(res.body);
-    }
-  }
-
-  Future<List> binaGetir(String mahalle, String yol) async {
-    var data = 'mahalleKoyBaglisiKimlikNo=$mahalle&yolKimlikNo=$yol';
-
-    http.Response res = await http.post(
-      Uri.parse('https://adres.nvi.gov.tr/Harita/binaListesi'),
-      headers: headers,
-      body: data,
-    );
-
-    if (res.statusCode != 200) {
-      print('post error: statusCode= ${res.statusCode}');
-      return [];
-    } else {
-      print(res.body);
-      return json.decode(res.body);
-    }
-  }
-
-  Future<List> daireGetir(String mahalle, String bina) async {
-    var data = 'mahalleKoyBaglisiKimlikNo=$mahalle&binaKimlikNo=$bina';
-
-    http.Response res = await http.post(
-      Uri.parse('https://adres.nvi.gov.tr/Harita/bagimsizBolumListesi'),
-      headers: headers,
-      body: data,
-    );
-
-    if (res.statusCode != 200) {
-      print('post error: statusCode= ${res.statusCode}');
-      return [];
-    } else {
-      print(res.body);
-      return json.decode(res.body);
-    }
-  }
-
-  filtrele(String c) {
-    k = c;
-    setState(() {});
+  void _filterList(String query) {
+    setState(() {
+      _filteredList = _dataList
+          .where((item) => item['bilesenAdi']
+              .toString()
+              .toLowerCase()
+              .contains(query.toLowerCase()))
+          .toList();
+    });
   }
 
   @override
@@ -215,55 +93,33 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
           },
         ),
         title: TextField(
-          onChanged: filtrele,
-          decoration: InputDecoration(
-            hintText: "Arama Yap",
-            hintStyle: TextStyle(color: yaziRengi),
-          ),
+          controller: _searchController,
           style: TextStyle(color: yaziRengi),
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text(
-              "Tamam",
-              style: TextStyle(color: yaziRengi),
-            ),
+          cursorColor: yaziRengi,
+          decoration: InputDecoration(
+            hintText: '${aranan.toUpperCase()} Ara...',
+            hintStyle: TextStyle(color: yaziRengi.withValues(alpha: 0.7)),
+            border: InputBorder.none,
           ),
-        ],
+          onChanged: _filterList,
+        ),
+        iconTheme: IconThemeData(color: yaziRengi),
       ),
-      body: veriVar
-          ? ListView.builder(
-              itemCount: liste?.length ?? 0,
-              itemBuilder: (ctx, i) {
-                if (liste![i]['bilesenAdi']
-                        .toString()
-                        .toUpperCase()
-                        .contains(k.toUpperCase()) ||
-                    liste![i]['bilesenAdi']
-                        .toString()
-                        .toLowerCase()
-                        .contains(k.toLowerCase())) {
-                  return ListTile(
-                    selected: liste![i]['kimlikNo'] == secili,
-                    onTap: () {
-                      secili = liste![i]['kimlikNo'];
-                      secim(liste![i]);
-                      setState(() {});
-                    },
-                    title: Text(liste![i]['bilesenAdi'] ?? ''),
-                    trailing: liste![i]['kimlikNo'] == secili
-                        ? Icon(Icons.check)
-                        : null,
-                  );
-                } else {
-                  return SizedBox(height: 0);
-                }
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: _filteredList.length,
+              itemBuilder: (context, index) {
+                final item = _filteredList[index];
+                return ListTile(
+                  title: Text(item['bilesenAdi']),
+                  onTap: () {
+                    secim(item);
+                    Navigator.pop(context);
+                  },
+                );
               },
-            )
-          : Center(child: CircularProgressIndicator()),
+            ),
     );
   }
 }
