@@ -1,11 +1,12 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class AdresAramaSyf extends StatefulWidget {
-  final Map gelen;
+  final Map<String, dynamic> gelen;
 
-  const AdresAramaSyf(this.gelen);
+  const AdresAramaSyf(this.gelen, {Key? key}) : super(key: key);
 
   @override
   _AdresAramaSyfState createState() => _AdresAramaSyfState();
@@ -17,12 +18,12 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
   String aranan = "il";
   String kod = "";
   String kod2 = "";
-  Function secim;
-  Color barRengi;
-  Color yaziRengi;
+  late Function(Map<String, dynamic>) secim;
+  Color? barRengi;
+  Color? yaziRengi;
   bool veriVar = false;
-  List liste;
-  Map args;
+  List<dynamic>? liste;
+  late Map<String, dynamic> args;
 
   var headers = {
     'Sec-Fetch-Mode': 'cors',
@@ -46,9 +47,9 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
   @override
   void initState() {
     args = widget.gelen;
-    aranan = args['liste'];
-    kod = args["kod"];
-    if (aranan == "bina" || aranan == "daire") kod2 = args["kod2"];
+    aranan = args['liste'] ?? 'il';
+    kod = args["kod"] ?? "";
+    if (aranan == "bina" || aranan == "daire") kod2 = args["kod2"] ?? "";
     secim = args['fonksiyon'];
 
     barRengi = args['bar_rengi'] ?? Colors.blue;
@@ -94,7 +95,9 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
   }
 
   Future<List> ilGetir() async {
-    http.Response res = await http.post('https://adres.nvi.gov.tr/Harita/ilListesi', headers: headers);
+    http.Response res = await http.post(
+        Uri.parse('https://adres.nvi.gov.tr/Harita/ilListesi'),
+        headers: headers);
     if (res.statusCode != 200) {
       print('post error: statusCode= ${res.statusCode}');
       return [];
@@ -106,7 +109,7 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
     var data = 'ilKimlikNo=$il';
 
     http.Response res = await http.post(
-      'https://adres.nvi.gov.tr/Harita/ilceListesi',
+      Uri.parse('https://adres.nvi.gov.tr/Harita/ilceListesi'),
       headers: headers,
       body: data,
     );
@@ -124,7 +127,7 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
     var data = 'ilceKimlikNo=$ilce';
 
     http.Response res = await http.post(
-      'https://adres.nvi.gov.tr/Harita/mahalleKoyBaglisiListesi',
+      Uri.parse('https://adres.nvi.gov.tr/Harita/mahalleKoyBaglisiListesi'),
       headers: headers,
       body: data,
     );
@@ -142,7 +145,7 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
     var data = 'mahalleKoyBaglisiKimlikNo=$mahalle';
 
     http.Response res = await http.post(
-      'https://adres.nvi.gov.tr/Harita/yolListesi',
+      Uri.parse('https://adres.nvi.gov.tr/Harita/yolListesi'),
       headers: headers,
       body: data,
     );
@@ -160,7 +163,7 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
     var data = 'mahalleKoyBaglisiKimlikNo=$mahalle&yolKimlikNo=$yol';
 
     http.Response res = await http.post(
-      'https://adres.nvi.gov.tr/Harita/binaListesi',
+      Uri.parse('https://adres.nvi.gov.tr/Harita/binaListesi'),
       headers: headers,
       body: data,
     );
@@ -178,7 +181,7 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
     var data = 'mahalleKoyBaglisiKimlikNo=$mahalle&binaKimlikNo=$bina';
 
     http.Response res = await http.post(
-      'https://adres.nvi.gov.tr/Harita/bagimsizBolumListesi',
+      Uri.parse('https://adres.nvi.gov.tr/Harita/bagimsizBolumListesi'),
       headers: headers,
       body: data,
     );
@@ -220,7 +223,7 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
           style: TextStyle(color: yaziRengi),
         ),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
@@ -233,19 +236,27 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
       ),
       body: veriVar
           ? ListView.builder(
-              itemCount: liste.length,
+              itemCount: liste?.length ?? 0,
               itemBuilder: (ctx, i) {
-                if (liste[i]['bilesenAdi'].toString().toUpperCase().contains(k.toUpperCase()) ||
-                    liste[i]['bilesenAdi'].toString().toLowerCase().contains(k.toLowerCase())) {
+                if (liste![i]['bilesenAdi']
+                        .toString()
+                        .toUpperCase()
+                        .contains(k.toUpperCase()) ||
+                    liste![i]['bilesenAdi']
+                        .toString()
+                        .toLowerCase()
+                        .contains(k.toLowerCase())) {
                   return ListTile(
-                    selected: liste[i]['kimlikNo'] == secili,
+                    selected: liste![i]['kimlikNo'] == secili,
                     onTap: () {
-                      secili = liste[i]['kimlikNo'];
-                      secim(liste[i]);
+                      secili = liste![i]['kimlikNo'];
+                      secim(liste![i]);
                       setState(() {});
                     },
-                    title: Text(liste[i]['bilesenAdi'] ?? ''),
-                    trailing: liste[i]['kimlikNo'] == secili ? Icon(Icons.check) : null,
+                    title: Text(liste![i]['bilesenAdi'] ?? ''),
+                    trailing: liste![i]['kimlikNo'] == secili
+                        ? Icon(Icons.check)
+                        : null,
                   );
                 } else {
                   return SizedBox(height: 0);

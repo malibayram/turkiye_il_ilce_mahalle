@@ -1,20 +1,42 @@
-## [0.1.1] - Widgets divided
+## [0.2.0] - 2025-12-05
 
-adresgetir widgeti, il, ilçe, köy ve mahalle şeklinde ayrıldı
+- Migrated to Null Safety.
+- Updated SDK constraints to Dart 3.
+- Updated dependencies.
+- Fixed deprecated APIs.
 
-## [0.1.2] - Ufak düzenlemeler
+## [0.1.8] - 2020-05-18
 
-* bar ve yazı rengi değiştirme seçeneği eklendi
+- Hata düzeltmeleri yapıldı.
 
-## [0.1.3] - Lisans Eklendi
+## [0.1.7] - 2020-05-18
 
-## [0.1.4] - Ufak bir düzeltme yapıldı
+- Hata düzeltmeleri yapıldı.
 
-## [0.1.5] - Paketin veri kullanımı internet üzerinden gerçekleşecek şekilde yeniden düzenlenerek boyutu düşürüldü, cadde, sokak, bina ve daire seçimi eklendi
+## [0.1.6] - 2020-05-18
 
-## [0.1.6] - Dart 2.5.0 versiyonuna güncellendi
+- Hata düzeltmeleri yapıldı.
 
-## [0.1.8] - Ufak düzeltmeler
-* Örnek kullanımında setState eklendi.
-* Dart versiyonu 2.7.0'a yükseltildi
-* http kütüphanesi 0.12.1'e yükseltildi
+## [0.1.5] - 2020-05-18
+
+- Hata düzeltmeleri yapıldı.
+
+## [0.1.4] - 2020-05-18
+
+- Hata düzeltmeleri yapıldı.
+
+## [0.1.3] - 2020-05-18
+
+- Hata düzeltmeleri yapıldı.
+
+## [0.1.2] - 2020-05-18
+
+- Hata düzeltmeleri yapıldı.
+
+## [0.1.1] - 2020-05-18
+
+- Hata düzeltmeleri yapıldı.
+
+## [0.1.0] - 2020-05-18
+
+- İlk sürüm yayınlandı.

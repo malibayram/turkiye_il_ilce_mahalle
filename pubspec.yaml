@@ -1,24 +1,22 @@
 name: turkiye_il_ilce_mahalle
 description: Turkiye Il Ilce Koy Mahalle Cadde Sokak Apartman ve Daire veritabanina bagli olarak adres secme flutter paketi
-version: 0.1.8
+version: 0.2.0
 homepage: https://github.com/malibayram91/turkiye_il_ilce_mahalle
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  http: ^0.12.1
-
+  http: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
 # To add assets to your package, add an assets section, like this:
 # assets:
 #  - images/a_dot_burr.jpeg

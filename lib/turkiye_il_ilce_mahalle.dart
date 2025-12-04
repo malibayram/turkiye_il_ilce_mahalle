@@ -1,18 +1,19 @@
 library turkiye_il_ilce_mahalle;
 
 import 'package:flutter/material.dart';
+
 import 'pages/aramasayfasi.dart';
 
 class Il extends StatefulWidget {
-  final Function fonksiyon;
+  final Function(Map<String, dynamic>) fonksiyon;
   final Widget child;
-  final Color barRengi;
-  final Color yaziRengi;
+  final Color? barRengi;
+  final Color? yaziRengi;
 
   const Il({
-    Key key,
-    @required this.fonksiyon,
-    @required this.child,
+    Key? key,
+    required this.fonksiyon,
+    required this.child,
     this.barRengi,
     this.yaziRengi,
   }) : super(key: key);
@@ -22,9 +23,9 @@ class Il extends StatefulWidget {
 }
 
 class _IlState extends State<Il> {
-  Map _il = {"bilesenAdi": "İl Seçimi Yapın"};
+  Map<String, dynamic> _il = {"bilesenAdi": "İl Seçimi Yapın"};
 
-  ilSecimiYap(Map secim) {
+  ilSecimiYap(Map<String, dynamic> secim) {
     _il = secim;
     widget.fonksiyon(_il);
     print("Seçilen il: ${_il['bilesenAdi']}");
@@ -55,19 +56,19 @@ class _IlState extends State<Il> {
 }
 
 class Ilce extends StatefulWidget {
-  final Function fonksiyon;
+  final Function(Map<String, dynamic>) fonksiyon;
   final Widget child;
   final String ilKodu;
   final bool ilVarMi;
-  final Color barRengi;
-  final Color yaziRengi;
+  final Color? barRengi;
+  final Color? yaziRengi;
 
   const Ilce({
-    Key key,
-    @required this.fonksiyon,
-    @required this.child,
-    @required this.ilKodu,
-    @required this.ilVarMi,
+    Key? key,
+    required this.fonksiyon,
+    required this.child,
+    required this.ilKodu,
+    required this.ilVarMi,
     this.barRengi,
     this.yaziRengi,
   }) : super(key: key);
@@ -77,9 +78,9 @@ class Ilce extends StatefulWidget {
 }
 
 class _IlceState extends State<Ilce> {
-  Map _ilce = {"bilesenAdi": "İlce Seçimi Yapın"};
+  Map<String, dynamic> _ilce = {"bilesenAdi": "İlce Seçimi Yapın"};
 
-  ilceSecimiYap(Map secim) {
+  ilceSecimiYap(Map<String, dynamic> secim) {
     _ilce = secim;
     widget.fonksiyon(_ilce);
     print("Seçilen ilce: ${_ilce['bilesenAdi']}");
@@ -112,19 +113,19 @@ class _IlceState extends State<Ilce> {
 }
 
 class Mahalle extends StatefulWidget {
-  final Function fonksiyon;
+  final Function(Map<String, dynamic>) fonksiyon;
   final Widget child;
   final String ilceKodu;
   final bool ilceVarMi;
-  final Color barRengi;
-  final Color yaziRengi;
+  final Color? barRengi;
+  final Color? yaziRengi;
 
   const Mahalle({
-    Key key,
-    @required this.fonksiyon,
-    @required this.child,
-    @required this.ilceKodu,
-    @required this.ilceVarMi,
+    Key? key,
+    required this.fonksiyon,
+    required this.child,
+    required this.ilceKodu,
+    required this.ilceVarMi,
     this.barRengi,
     this.yaziRengi,
   }) : super(key: key);
@@ -134,9 +135,9 @@ class Mahalle extends StatefulWidget {
 }
 
 class _MahalleState extends State<Mahalle> {
-  Map _mahalle = {"bilesenAdi": "Mahalle Seçimi Yapın"};
+  Map<String, dynamic> _mahalle = {"bilesenAdi": "Mahalle Seçimi Yapın"};
 
-  mahalleSecimiYap(Map secim) {
+  mahalleSecimiYap(Map<String, dynamic> secim) {
     _mahalle = secim;
     widget.fonksiyon(_mahalle);
     print("Seçilen Mahalle: ${_mahalle['bilesenAdi']}");
@@ -169,19 +170,19 @@ class _MahalleState extends State<Mahalle> {
 }
 
 class Yol extends StatefulWidget {
-  final Function fonksiyon;
+  final Function(Map<String, dynamic>) fonksiyon;
   final Widget child;
   final String mahalleKodu;
   final bool mahalleVarMi;
-  final Color barRengi;
-  final Color yaziRengi;
+  final Color? barRengi;
+  final Color? yaziRengi;
 
   const Yol({
-    Key key,
-    @required this.fonksiyon,
-    @required this.child,
-    @required this.mahalleKodu,
-    @required this.mahalleVarMi,
+    Key? key,
+    required this.fonksiyon,
+    required this.child,
+    required this.mahalleKodu,
+    required this.mahalleVarMi,
     this.barRengi,
     this.yaziRengi,
   }) : super(key: key);
@@ -191,9 +192,9 @@ class Yol extends StatefulWidget {
 }
 
 class _YolState extends State<Yol> {
-  Map _yol = {"bilesenAdi": "Yol Seçimi Yapın"};
+  Map<String, dynamic> _yol = {"bilesenAdi": "Yol Seçimi Yapın"};
 
-  yolSecimiYap(Map secim) {
+  yolSecimiYap(Map<String, dynamic> secim) {
     _yol = secim;
     widget.fonksiyon(_yol);
     print("Seçilen Yol: ${_yol['bilesenAdi']}");
@@ -226,21 +227,21 @@ class _YolState extends State<Yol> {
 }
 
 class Bina extends StatefulWidget {
-  final Function fonksiyon;
+  final Function(Map<String, dynamic>) fonksiyon;
   final Widget child;
   final String yolKodu;
   final bool yolVarMi;
-  final String mahalleKodu;
-  final bool mahalleVarMi;
-  final Color barRengi;
-  final Color yaziRengi;
+  final String? mahalleKodu;
+  final bool? mahalleVarMi;
+  final Color? barRengi;
+  final Color? yaziRengi;
 
   const Bina({
-    Key key,
-    @required this.fonksiyon,
-    @required this.child,
-    @required this.yolKodu,
-    @required this.yolVarMi,
+    Key? key,
+    required this.fonksiyon,
+    required this.child,
+    required this.yolKodu,
+    required this.yolVarMi,
     this.mahalleKodu,
     this.mahalleVarMi,
     this.barRengi,
@@ -252,9 +253,9 @@ class Bina extends StatefulWidget {
 }
 
 class _BinaState extends State<Bina> {
-  Map _bina = {"bilesenAdi": "Bina Seçimi Yapın"};
+  Map<String, dynamic> _bina = {"bilesenAdi": "Bina Seçimi Yapın"};
 
-  binaSecimiYap(Map secim) {
+  binaSecimiYap(Map<String, dynamic> secim) {
     _bina = secim;
     widget.fonksiyon(_bina);
     print("Seçilen Bina: ${_bina['bilesenAdi']}");
@@ -288,21 +289,21 @@ class _BinaState extends State<Bina> {
 }
 
 class Daire extends StatefulWidget {
-  final Function fonksiyon;
+  final Function(Map<String, dynamic>) fonksiyon;
   final Widget child;
   final String binaKodu;
   final bool binaVarMi;
-  final String mahalleKodu;
-  final bool mahalleVarMi;
-  final Color barRengi;
-  final Color yaziRengi;
+  final String? mahalleKodu;
+  final bool? mahalleVarMi;
+  final Color? barRengi;
+  final Color? yaziRengi;
 
   const Daire({
-    Key key,
-    @required this.fonksiyon,
-    @required this.child,
-    @required this.binaKodu,
-    @required this.binaVarMi,
+    Key? key,
+    required this.fonksiyon,
+    required this.child,
+    required this.binaKodu,
+    required this.binaVarMi,
     this.mahalleKodu,
     this.mahalleVarMi,
     this.barRengi,
@@ -314,9 +315,9 @@ class Daire extends StatefulWidget {
 }
 
 class _DaireState extends State<Daire> {
-  Map _daire = {"bilesenAdi": "Daire Seçimi Yapın"};
+  Map<String, dynamic> _daire = {"bilesenAdi": "Daire Seçimi Yapın"};
 
-  daireSecimiYap(Map secim) {
+  daireSecimiYap(Map<String, dynamic> secim) {
     _daire = secim;
     widget.fonksiyon(_daire);
     print("Seçilen Daire: ${_daire['bilesenAdi']}");
