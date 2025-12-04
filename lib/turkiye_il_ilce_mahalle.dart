@@ -7,15 +7,15 @@ import 'pages/aramasayfasi.dart';
 class Il extends StatefulWidget {
   final Function(Map<String, dynamic>) fonksiyon;
   final Widget child;
-  final Color? barRengi;
-  final Color? yaziRengi;
+  final Color barRengi;
+  final Color yaziRengi;
 
   const Il({
     Key? key,
     required this.fonksiyon,
     required this.child,
-    this.barRengi,
-    this.yaziRengi,
+    this.barRengi = Colors.blue,
+    this.yaziRengi = Colors.white,
   }) : super(key: key);
 
   @override
@@ -39,13 +39,13 @@ class _IlState extends State<Il> {
           context,
           MaterialPageRoute(
             builder: (BuildContext context) {
-              return AdresAramaSyf({
-                "liste": "il",
-                "kod": "",
-                "fonksiyon": ilSecimiYap,
-                "bar_rengi": widget.barRengi,
-                "yazi_rengi": widget.yaziRengi,
-              });
+              return AdresAramaSyf(
+                aranan: "il",
+                kod: "",
+                secim: ilSecimiYap,
+                barRengi: widget.barRengi,
+                yaziRengi: widget.yaziRengi,
+              );
             },
           ),
         );
@@ -60,8 +60,8 @@ class Ilce extends StatefulWidget {
   final Widget child;
   final String ilKodu;
   final bool ilVarMi;
-  final Color? barRengi;
-  final Color? yaziRengi;
+  final Color barRengi;
+  final Color yaziRengi;
 
   const Ilce({
     Key? key,
@@ -69,8 +69,8 @@ class Ilce extends StatefulWidget {
     required this.child,
     required this.ilKodu,
     required this.ilVarMi,
-    this.barRengi,
-    this.yaziRengi,
+    this.barRengi = Colors.blue,
+    this.yaziRengi = Colors.white,
   }) : super(key: key);
 
   @override
@@ -95,13 +95,13 @@ class _IlceState extends State<Ilce> {
             context,
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return AdresAramaSyf({
-                  "liste": "ilce",
-                  "kod": widget.ilKodu,
-                  "fonksiyon": ilceSecimiYap,
-                  "bar_rengi": widget.barRengi,
-                  "yazi_rengi": widget.yaziRengi,
-                });
+                return AdresAramaSyf(
+                  aranan: "ilce",
+                  kod: widget.ilKodu,
+                  secim: ilceSecimiYap,
+                  barRengi: widget.barRengi,
+                  yaziRengi: widget.yaziRengi,
+                );
               },
             ),
           );
@@ -117,8 +117,8 @@ class Mahalle extends StatefulWidget {
   final Widget child;
   final String ilceKodu;
   final bool ilceVarMi;
-  final Color? barRengi;
-  final Color? yaziRengi;
+  final Color barRengi;
+  final Color yaziRengi;
 
   const Mahalle({
     Key? key,
@@ -126,8 +126,8 @@ class Mahalle extends StatefulWidget {
     required this.child,
     required this.ilceKodu,
     required this.ilceVarMi,
-    this.barRengi,
-    this.yaziRengi,
+    this.barRengi = Colors.blue,
+    this.yaziRengi = Colors.white,
   }) : super(key: key);
 
   @override
@@ -152,13 +152,13 @@ class _MahalleState extends State<Mahalle> {
             context,
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return AdresAramaSyf({
-                  "liste": "mahalle",
-                  "kod": widget.ilceKodu,
-                  "fonksiyon": mahalleSecimiYap,
-                  "bar_rengi": widget.barRengi,
-                  "yazi_rengi": widget.yaziRengi,
-                });
+                return AdresAramaSyf(
+                  aranan: "mahalle",
+                  kod: widget.ilceKodu,
+                  secim: mahalleSecimiYap,
+                  barRengi: widget.barRengi,
+                  yaziRengi: widget.yaziRengi,
+                );
               },
             ),
           );

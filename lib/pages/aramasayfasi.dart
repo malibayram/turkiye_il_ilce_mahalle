@@ -2,21 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:turkiye_il_ilce_mahalle/service/turkiye_location_service.dart';
 
 class AdresAramaSyf extends StatefulWidget {
-  final Map<String, dynamic> gelen;
+  final String aranan;
+  final String kod;
+  final Function(Map<String, dynamic>) secim;
+  final Color barRengi;
+  final Color yaziRengi;
 
-  const AdresAramaSyf(this.gelen, {Key? key}) : super(key: key);
+  const AdresAramaSyf({
+    Key? key,
+    required this.aranan,
+    required this.kod,
+    required this.secim,
+    this.barRengi = Colors.blue,
+    this.yaziRengi = Colors.white,
+  }) : super(key: key);
 
   @override
   _AdresAramaSyfState createState() => _AdresAramaSyfState();
 }
 
 class _AdresAramaSyfState extends State<AdresAramaSyf> {
-  late Map<String, dynamic> args;
   late String aranan;
   String? kod;
   late Function(Map<String, dynamic>) secim;
-  Color barRengi = Colors.blue;
-  Color yaziRengi = Colors.white;
 
   final TurkiyeLocationService _service = TurkiyeLocationService();
   List<Map<String, dynamic>> _dataList = [];
@@ -27,13 +35,9 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
   @override
   void initState() {
     super.initState();
-    args = widget.gelen;
-    aranan = args['liste'];
-    kod = args["kod"];
-    secim = args['fonksiyon'];
-
-    barRengi = args['bar_rengi'] ?? Colors.blue;
-    yaziRengi = args['yazi_rengi'] ?? Colors.white;
+    aranan = widget.aranan;
+    kod = widget.kod;
+    secim = widget.secim;
 
     _fetchData();
   }
@@ -82,11 +86,11 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: barRengi,
+        backgroundColor: widget.barRengi,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: yaziRengi,
+            color: widget.yaziRengi,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -94,16 +98,17 @@ class _AdresAramaSyfState extends State<AdresAramaSyf> {
         ),
         title: TextField(
           controller: _searchController,
-          style: TextStyle(color: yaziRengi),
-          cursorColor: yaziRengi,
+          style: TextStyle(color: widget.yaziRengi),
+          cursorColor: widget.yaziRengi,
           decoration: InputDecoration(
             hintText: '${aranan.toUpperCase()} Ara...',
-            hintStyle: TextStyle(color: yaziRengi.withValues(alpha: 0.7)),
+            hintStyle:
+                TextStyle(color: widget.yaziRengi.withValues(alpha: 0.7)),
             border: InputBorder.none,
           ),
           onChanged: _filterList,
         ),
-        iconTheme: IconThemeData(color: yaziRengi),
+        iconTheme: IconThemeData(color: widget.yaziRengi),
       ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
